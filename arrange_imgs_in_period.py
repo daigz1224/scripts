@@ -2,10 +2,10 @@ import os
 import shutil
 from matplotlib import pyplot as plt
 
-input_path = '/media/dai/ed9cf21d-a757-4514-b33a-34472199d3b2/daiguozheng_files/night_data/0606'
+input_path = '/media/dai/ed9cf21d-a757-4514-b33a-34472199d3b2/daiguozheng_files/night_data/0607'
 input_name = input_path.split('/')[-1]
 
-period = 10  # 10 min
+period = 5  # 10 min
 output_dir = '/media/dai/ed9cf21d-a757-4514-b33a-34472199d3b2/daiguozheng_files' + '/data_night_' + str(period) + '_minutes'
 
 if os.path.exists(output_dir) == 0:
