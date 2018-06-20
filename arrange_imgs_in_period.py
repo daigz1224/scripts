@@ -21,20 +21,21 @@ sublist = [recordlist[i: i+period] for i in range(0, len(recordlist), period)]
 print(str(len(sublist)) + ' sublist in total...')
 
 for index in range(len(sublist)):
+    index = "%04d" % index
     ## 创建时间目录
-    if os.path.exists(output_dir + '/' + str(index)) == 0:
-        print('mkdir ' + output_dir + '/' + str(index) + '...')
-        os.mkdir(output_dir + '/' + str(index))
+    if os.path.exists(output_dir + '/' + index) == 0:
+        print('mkdir ' + output_dir + '/' + index + '...')
+        os.mkdir(output_dir + '/' + index)
     ## 将每个record中的jpg拷贝到对应时间目录中
     for r in sublist[index]:
         record_path = input_path + '/' + r            
-        print('index = ' + str(index) + ', record = ' + r)
+        print('index = ' + index + ', record = ' + r)
         
         for f in os.listdir(input_path + '/' + r + '/image_data'):
             if f.endswith('.jpg'):
                 # print('copying ' + f + '...')
                 f_path = input_path + '/' + r + '/image_data/' + f
-                target_path = output_dir + '/' + str(index) + '/' + f
+                target_path = output_dir + '/' + index + '/' + f
                 shutil.copyfile(f_path, target_path)
 
 print('end.')
