@@ -3,15 +3,18 @@ from PIL import Image, ImageStat
 import os
 import pickle
 
-dirpath = "/media/dai/ed9cf21d-a757-4514-b33a-34472199d3b2/daiguozheng_files/data_night_10_minutes"
+# dirpath = "/media/dai/ed9cf21d-a757-4514-b33a-34472199d3b2/daiguozheng_files/data_night_10_minutes"
+dirpath = "/media/dai/ed9cf21d-a757-4514-b33a-34472199d3b2/daiguozheng_files/data_rain_1_minutes"
+
 dirname = dirpath.split('/')[-1]
 output = "/media/dai/ed9cf21d-a757-4514-b33a-34472199d3b2/daiguozheng_files" + '/' + dirname + '.pkl'
-time = sorted(os.listdir(dirpath))  # [0,1,2,3..,9]
+time = sorted(list(map(int, os.listdir(dirpath))))  # [0,1,2,3..,9]
 print(time)
 
 bris_all = []
 
 for index in time:
+    index = str(index)
     print('time_index = ' + index)
     jpgs = os.listdir(dirpath+'/'+index)
     jpgs_index = list(range(1, len(jpgs) + 1, 1))
