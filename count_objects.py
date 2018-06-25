@@ -2,7 +2,7 @@
 # coding: utf-8
 import os
 import json
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 
 IMAGE_W = 1920
