@@ -1,2 +1,2 @@
 # scripts
-my scripts
+Scripts for a better life.
