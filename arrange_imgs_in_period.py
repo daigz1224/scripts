@@ -1,41 +1,51 @@
+# Author: daiguozheng
+# 用法：python3 arrange_imgs_in_period.py
+# 说明：从 input_path 中按照一定的时间周期建立文件夹存放对应时间的图片。
+# 前提：input_path 中需要筛选好特定时间段，该脚本 不会 按照文件名对应的时间进行提取。
+
 import os
 import shutil
-from matplotlib import pyplot as plt
-
-input_path = '/media/dai/ed9cf21d-a757-4514-b33a-34472199d3b2/daiguozheng_files/night_data/0607'
-input_name = input_path.split('/')[-1]
-
-period = 5  # 10 min
-output_dir = '/media/dai/ed9cf21d-a757-4514-b33a-34472199d3b2/daiguozheng_files' + '/data_night_' + str(period) + '_minutes'
-
-if os.path.exists(output_dir) == 0:
-    os.mkdir(output_dir)
-
 
 def key_record(record):
+    # 按照 record 文件名终中的关键数组进行排序
     num = record.split('_')[3]
     return int(num)
 
-recordlist = sorted(os.listdir(input_path), key=key_record)
-sublist = [recordlist[i: i+period] for i in range(0, len(recordlist), period)]
-print(str(len(sublist)) + ' sublist in total...')
+def main(input_path, period, output_dir):
+    # input_name = input_path.split('/')[-1]
+    recordlist = sorted(os.listdir(input_path), key=key_record)
+    print("recordlist: \n")
+    print(recordlist)
+    sublist = [recordlist[i: i+period] for i in range(0, len(recordlist), period)]
+    print("we got " + str(len(sublist)) + ' sublists in total.')
 
-for index in range(len(sublist)):
-    index = "%04d" % index
-    ## 创建时间目录
-    if os.path.exists(output_dir + '/' + index) == 0:
-        print('mkdir ' + output_dir + '/' + index + '...')
-        os.mkdir(output_dir + '/' + index)
-    ## 将每个record中的jpg拷贝到对应时间目录中
-    for r in sublist[index]:
-        record_path = input_path + '/' + r            
-        print('index = ' + index + ', record = ' + r)
-        
-        for f in os.listdir(input_path + '/' + r + '/image_data'):
-            if f.endswith('.jpg'):
-                # print('copying ' + f + '...')
-                f_path = input_path + '/' + r + '/image_data/' + f
-                target_path = output_dir + '/' + index + '/' + f
-                shutil.copyfile(f_path, target_path)
+    for index in range(len(sublist)):
+        index = "%05d" % index  # 强行补零，方便字符串排序
+        ## 创建时间目录
+        index_path = output_dir + '/' + index
+        if os.path.exists(index_path) == 0:
+            os.mkdir(index_path)
+        ## 将每个 record 中的 jpg 拷贝到对应时间目录中
+        for record in sublist[index]:
+            record_path = input_path + '/' + record           
+            print('time index: ' + index + ', dealing with record file: ' + record)
+            for f in os.listdir(record_path + '/image_data'):
+                if f.endswith('.jpg'):
+                    f_path = record_path + '/image_data/' + f
+                    target_path = index_path + '/' + f
+                    shutil.copyfile(f_path, target_path)
 
-print('end.')
+if __name__ == '__main__':
+    input_path = '~/Documents/export_dir/0607'
+    period = 5  # min
+    output_dir = '~/Documents/' + 'data_night_' + str(period) + '_minutes'
+    
+    if os.path.exists(output_dir) == 0:
+        os.mkdir(output_dir)
+
+    print("input_path: " + input_path)
+    print("period: " + period)
+
+    main(input_path, period, output_dir)
+
+    print('End.')
