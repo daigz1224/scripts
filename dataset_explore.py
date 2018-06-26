@@ -34,7 +34,7 @@ class ImageResult:
 def main(args):
     """ Main entry.
     """
-    print args
+    # print args
     if not os.path.exists(args.label_dir):
         os.makedirs(args.label_dir)
     with open(args.raw_label, 'r') as fp:

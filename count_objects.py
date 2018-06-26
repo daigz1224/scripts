@@ -1,4 +1,3 @@
-# !/home/dai/anaconda3/bin python3
 # coding: utf-8
 import os
 import json
