@@ -30,13 +30,14 @@ def is_results_line(line):
 def main(txt_path, pkl_path):
     with open(txt_path, 'r') as fp:
         info_lines = [line.split() for line in fp if is_results_line(line)]
-    
+    print("info_lines = %d\n", info_lines)
     res_pkl = {}
     for label in enumerate(info_lines):  
         # bag_name = label[0]
         # jpg_path = label[2]
         # numberBox = result_dict['numberBox']
-        result_dict = json.loads(label[3])
+        result = label[3]
+        result_dict = json.loads(result)
 
         for obstacle_dict in result_dict['result']:
             tag = LABEL_MAP[obstacle_dict['tag']]
@@ -52,7 +53,7 @@ def main(txt_path, pkl_path):
 
 if __name__ == '__main__':
     data_root = '/media/dai/ed9cf21d-a757-4514-b33a-34472199d3b2/daiguozheng_files'
-    folder = 'mark_task_511-20170515_ShangDi_ARZ034-2D_OBSTACLE_NO_GROUND_POINT'
+    folder = 'mark_task_2988-layer1-city-test-LAYER1_BARRIER_2018'
     txt_path = data_root + '/' + folder + '/' + 'result.txt'
     pkl_path = data_root + '/' + folder + '.pkl'
 
