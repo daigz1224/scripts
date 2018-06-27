@@ -30,9 +30,9 @@ def is_results_line(line):
 def main(txt_path, pkl_path):
     with open(txt_path, 'r') as fp:
         info_lines = [line.split() for line in fp if is_results_line(line)]
-    print("info_lines = %d\n", info_lines)
+    print("info_lines = %d\n", len(info_lines))
     res_pkl = {}
-    for label in enumerate(info_lines):  
+    for label in info_lines:  
         # bag_name = label[0]
         # jpg_path = label[2]
         # numberBox = result_dict['numberBox']
