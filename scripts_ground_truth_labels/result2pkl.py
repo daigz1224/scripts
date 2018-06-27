@@ -30,7 +30,8 @@ def is_results_line(line):
 def main(txt_path, pkl_path):
     with open(txt_path, 'r') as fp:
         info_lines = [line.split() for line in fp if is_results_line(line)]
-    print("info_lines = %d\n", len(info_lines))
+    print("info_lines = " + str(len(info_lines)))
+
     res_pkl = {}
     for label in info_lines:  
         # bag_name = label[0]
@@ -41,14 +42,15 @@ def main(txt_path, pkl_path):
 
         for obstacle_dict in result_dict['result']:
             tag = LABEL_MAP[obstacle_dict['tag']]
-            if tag not in obstacle_dict:
+            if tag not in res_pkl:
                 res_pkl[tag] = []
             x = float(obstacle_dict["x"])
             y = float(obstacle_dict["y"])
             w = float(obstacle_dict["w"])
             h = float(obstacle_dict["h"])
             res_pkl[tag].append([x, y, w, h])
-    with open(pkl_path, 'w') as fw:
+            # print(res_pkl[tag])
+    with open(pkl_path, 'wb') as fw:
         pickle.dump(res_pkl, fw)
 
 if __name__ == '__main__':
