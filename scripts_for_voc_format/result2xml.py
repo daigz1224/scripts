@@ -86,8 +86,6 @@ def main(result_path, output):
 
     for i, fields in enumerate(v_labels):  
         result2xml(fields, output)
-        
-
 
 if __name__ == '__main__':
     data_root = '/media/dai/ed9cf21d-a757-4514-b33a-34472199d3b2/daiguozheng_files/mark_task_511-20170515_ShangDi_ARZ034-2D_OBSTACLE_NO_GROUND_POINT/'
@@ -96,3 +94,4 @@ if __name__ == '__main__':
     print("data_root: " + data_root)
     print("output: " + output)
     main(result_path, output)
+    print("End.")
