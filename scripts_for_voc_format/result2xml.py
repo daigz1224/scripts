@@ -1,11 +1,9 @@
 # coding: utf-8
 import os
 import json
-from common import LABEL_MAP
+from others.common import LABEL_MAP
 
 from lxml.etree import Element, SubElement, tostring
-import pprint
-from xml.dom.minidom import parseString
 
 IMAGE_W = 1920
 IMAGE_H = 1080
